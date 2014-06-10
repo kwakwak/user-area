@@ -3,14 +3,17 @@
 angular.module('userAreaApp')
   .service('Sessionservice', function () {
 
-        var userIsAuthenticated = false;
-
-        this.setUserAuthenticated = function(value){
-            userIsAuthenticated = value;
+        var user ={
+            Authenticated: false,
+            pointer: ''
         };
 
-        this.getUserAuthenticated = function(){
-            return userIsAuthenticated;
+        this.setUser = function(newUser){
+            user= newUser;
+        };
+
+        this.getUser = function(){
+            return user;
         };
   });
 

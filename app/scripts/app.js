@@ -26,7 +26,7 @@ angular
 
         $rootScope.$on('$routeChangeStart', function(event, next, current) {
             if(next.requireLogin) {
-                if (!Sessionservice.getUserAuthenticated()){
+                if (!Sessionservice.getUser().Authenticated){
                     console.log ("You are not Authenticated!");
                     $location.path( "/login" );
                 }

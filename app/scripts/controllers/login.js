@@ -6,7 +6,10 @@ angular.module('userAreaApp')
     $scope.dicti = dicti;
     $scope.login = function (credentials){
         login(credentials.email,credentials.password).then(function(res){
-            Sessionservice.setUserAuthenticated(res.data.success);
+            Sessionservice.setUser({
+                Authenticated: res.data.success,
+                pointer: res.data.pointer
+            });
 
             if (res.data.success){
                 $location.path( "/invite" );

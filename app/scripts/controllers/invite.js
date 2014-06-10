@@ -1,10 +1,21 @@
 'use strict';
 
 angular.module('userAreaApp')
-  .controller('InviteCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+  .controller('InviteCtrl', ['$scope','Sessionservice','invite','dicti',
+        function ($scope,Sessionservice,invite,dicti) {
+
+        $scope.dicti = dicti;
+        $scope.invite = function (form){
+            invite(Sessionservice.getUser().pointer,form.email).then(function(res){
+
+                console.log(res.data);
+
+                if (res.data.success){
+
+                } else {
+
+                }
+
+            });
+        };
+  }]);
