@@ -4,7 +4,7 @@ angular.module('userAreaApp')
   .controller('LoginCtrl', ['$scope','Sessionservice',
                             function ($scope,Sessionservice) {
 
-
+    $scope.status = Sessionservice.getUserAuthenticated();
 
     $scope.good=function(){
         Sessionservice.setUserAuthenticated(true);

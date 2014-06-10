@@ -9,9 +9,6 @@ angular
   ])
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/', {
-        redirectTo: '/login'
-      })
       .when('/login', {
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl',
@@ -23,11 +20,17 @@ angular
         requireLogin: true
       })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/login'
       });
-    }).run(['$rootScope','Sessionservice',function($rootScope,Sessionservice){
-        $rootScope.$on("$locationChangeStart", function(event, next, current) {
-            console.log(Sessionservice.getUserAuthenticated());
+    }).run(['$rootScope','Sessionservice','$location',function($rootScope,Sessionservice,$location){
+
+        $rootScope.$on('$routeChangeStart', function(event, next, current) {
+            if(next.requireLogin) {
+                if (!Sessionservice.getUserAuthenticated()){
+                    console.log ("You are not Authenticated!");
+                    $location.path( "/login" );
+                }
+            }
         });
 
     }]);
