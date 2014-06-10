@@ -1,11 +1,12 @@
 <form name="inviteForm" ng-submit="invite(form)"
       novalidate>
     <label for="email">{{dicti.email}}:</label>
-    <input type="text" id=email"
-           ng-model="form.email" required>
+    <input type="text" name="email"
+           ng-model="form.email" required check-email
+           ng-pattern="/^(([^<>()[\]\\.,;:\s@\']+(\.[^<>()[\]\\.,;:\s@\']+)*)|(\'.+\'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/">
 
-    <button type="submit" ng-disabled="inviteForm.$invalid">{{dicti.invite}}</button>
+    <button type="submit" ng-disabled="!(!inviteForm.email.$error.exist && inviteForm.$valid)">{{dicti.invite}}</button>
 </form>
-
+<p ng-show="inviteForm.email.$invalid && !inviteForm.email.$pristine">{{dicti.err.email}}</p>
 <p ng-show="error">{{dicti.err.invite}}</p>
 <p ng-show="success">{{dicti.inviteMsg}}</p>
