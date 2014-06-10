@@ -11,9 +11,13 @@ angular.module('userAreaApp')
                 console.log(res.data);
 
                 if (res.data.success){
+                    $scope.success = true
+                    $scope.form ={};
+                    $scope.error = false
 
                 } else {
-
+                    $scope.success = false
+                    $scope.error = true
                 }
 
             });
